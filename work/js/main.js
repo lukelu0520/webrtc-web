@@ -34,6 +34,7 @@ var socket = io.connect();
 
 if (room !== '') {
   socket.emit('create or join', room);
+  console.log('This peer is the initiator of room ' + room + '!');
   console.log('Attempted to create or  join room', room);
 }
 
@@ -48,7 +49,6 @@ socket.on('full', function(room) {
 
 socket.on('join', function (room){
   console.log('Another peer made a request to join room ' + room);
-  console.log('This peer is the initiator of room ' + room + '!');
   isChannelReady = true;
 });
 
@@ -103,7 +103,7 @@ navigator.mediaDevices.getUserMedia({
 })
 .then(gotStream)
 .catch(function(e) {
-  alert('getUserMedia() error: ' + e.name);
+  alert('getUserMedia() err: ' + e.name + ' ' + e.message);
 });
 
 function gotStream(stream) {
