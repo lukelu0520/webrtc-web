@@ -24,6 +24,10 @@ io.sockets.on('connection', function(socket) {
     log('Client said: ', message);
     // for a real app, would be room-only (not broadcast)
     socket.broadcast.emit('message', message);
+    if(message=='got user media'){
+      socket.broadcast.emit('ready to stream', true);
+      console.log('nodejs server got msg got user media');
+    }
   });
 
   socket.on('create or join', function(room) {
@@ -68,5 +72,6 @@ io.sockets.on('connection', function(socket) {
   socket.on('bye', function(){
     console.log('received bye');
   });
+
 
 });
